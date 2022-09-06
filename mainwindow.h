@@ -48,6 +48,8 @@ private slots:
 
     void on_spinBox_2_valueChanged(int arg1);
 
+    void on_remove_button_clicked();
+
 private:
     QSqlDatabase db;
     Ui::MainWindow *ui;

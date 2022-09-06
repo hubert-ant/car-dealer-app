@@ -23,6 +23,7 @@
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -60,10 +61,11 @@ public:
     QSpinBox *spinBox_2;
     QCheckBox *checkBox;
     QCheckBox *checkBox_2;
-    QPushButton *pushButton;
+    QPushButton *remove_button;
     QTableWidget *tableWidget;
     QMenuBar *menubar;
     QStatusBar *statusbar;
+    QToolBar *toolBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -117,7 +119,6 @@ public:
         gridLayout->addWidget(label_4, 2, 0, 1, 1);
 
         comboBox_3 = new QComboBox(widget);
-        comboBox_3->addItem(QString());
         comboBox_3->addItem(QString());
         comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
         comboBox_3->setMinimumSize(QSize(120, 0));
@@ -242,9 +243,9 @@ public:
 
         gridLayout_2->addWidget(checkBox_2, 3, 3, 1, 1);
 
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(570, 30, 91, 24));
+        remove_button = new QPushButton(centralwidget);
+        remove_button->setObjectName(QString::fromUtf8("remove_button"));
+        remove_button->setGeometry(QRect(570, 30, 91, 24));
         tableWidget = new QTableWidget(centralwidget);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
         tableWidget->setGeometry(QRect(0, 201, 986, 361));
@@ -257,6 +258,9 @@ public:
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
+        toolBar = new QToolBar(MainWindow);
+        toolBar->setObjectName(QString::fromUtf8("toolBar"));
+        MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
         retranslateUi(MainWindow);
 
@@ -277,7 +281,6 @@ public:
 
         label_4->setText(QCoreApplication::translate("MainWindow", "Model", nullptr));
         comboBox_3->setItemText(0, QString());
-        comboBox_3->setItemText(1, QString());
 
         label_5->setText(QCoreApplication::translate("MainWindow", "Bodywork", nullptr));
         comboBox_4->setItemText(0, QString());
@@ -293,7 +296,8 @@ public:
         label_17->setText(QCoreApplication::translate("MainWindow", "+/-", nullptr));
         checkBox->setText(QCoreApplication::translate("MainWindow", "Air conditioning", nullptr));
         checkBox_2->setText(QCoreApplication::translate("MainWindow", "GPS", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Remove filters", nullptr));
+        remove_button->setText(QCoreApplication::translate("MainWindow", "Remove filters", nullptr));
+        toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi
 
 };

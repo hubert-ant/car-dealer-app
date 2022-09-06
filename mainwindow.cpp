@@ -37,19 +37,15 @@ QSqlDatabase MainWindow::read_database(const QString &database_name){
 }
 
 void MainWindow::on_comboBox_currentTextChanged(const QString &arg1){
-    ui -> checkBox -> setCheckState(Qt::PartiallyChecked);
-    ui -> checkBox_2 -> setCheckState(Qt::PartiallyChecked);
-
     Car::clearVector();
 
     if(arg1 == "Cars"){
         db = read_database("cars");
-    }else{
+    }else if(arg1 == "Motorbikes"){
         db = read_database("motorbikes");
     }
 
     if(db.open()){
-        qDebug() << "connected";
         QSqlQuery query;
         if(query.exec("SELECT * FROM `car_dealer`")){
             while(query.next()){
@@ -70,59 +66,68 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1){
         }else{
             qDebug() << "Error = " << db.lastError();
         }
-        qDebug() << "Closing database";
         db.close();
+
+        ui -> checkBox -> setCheckState(Qt::PartiallyChecked);
+        ui -> checkBox_2 -> setCheckState(Qt::PartiallyChecked);
+        QVector <Car*> vector_of_cars = Car::getVector(); //adding databse marks, bodyworks and colours to combobox
+        for(auto it = vector_of_cars.begin(); it != vector_of_cars.end(); it++){
+            if(ui -> comboBox_2 -> findText((*it) -> getMark()) == -1){
+                ui -> comboBox_2 -> addItem((*it) -> getMark());
+            }
+            if(ui -> comboBox_4 -> findText((*it) -> getBodywork()) == -1){
+                ui -> comboBox_4 -> addItem((*it) -> getBodywork());
+            }
+            if(ui -> comboBox_5 -> findText((*it) -> getColour()) == -1){
+                ui -> comboBox_5 -> addItem((*it) -> getColour());
+            }
+        }
+
+        Car::display(ui -> tableWidget);
+        vector_of_cars.clear();
     }else{
-        QMessageBox::information(this, "Connection", "Problems with connection to database");
-    }
-
-    QVector <Car*> vector_of_cars = Car::getVector();                       //adding databse marks, bodyworks and colours to combobox
-    for(auto it = vector_of_cars.begin(); it != vector_of_cars.end(); it++){
-        if(ui -> comboBox_2 -> findText((*it) -> getMark()) == -1){
-            ui -> comboBox_2 -> addItem((*it) -> getMark());
-        }
-        if(ui -> comboBox_4 -> findText((*it) -> getBodywork()) == -1){
-            ui -> comboBox_4 -> addItem((*it) -> getBodywork());
-        }
-        if(ui -> comboBox_5 -> findText((*it) -> getColour()) == -1){
-            ui -> comboBox_5 -> addItem((*it) -> getColour());
+        if(arg1 != ""){
+            QMessageBox::information(this, "Connection", "Problems with connection to database.");
+            ui -> comboBox -> setCurrentIndex(0);
         }
     }
-
-    Car::display(ui -> tableWidget);
-
-    vector_of_cars.clear();
 }
 
 void MainWindow::on_search_button_clicked(){//searching cars we want, using filter car with sepcified atributes
      Car *filter_car = new Car();
+     QVector<Car*> vector_of_cars = Car::getVector();
 
-     filter_car -> setMark(ui-> comboBox_2 -> currentText());
-     filter_car -> setModel(ui-> comboBox_3 -> currentText());
-     filter_car -> setBodywork(ui-> comboBox_4 -> currentText());
-     filter_car -> setColour(ui -> comboBox_5 -> currentText());
-     filter_car -> setMileage(ui -> spinBox_3 -> value());
-     filter_car -> setEngineCap(ui -> doubleSpinBox_2 -> value());
-     filter_car -> setHP(ui -> spinBox_5 -> value());
-     if(ui -> checkBox -> checkState() == Qt::Unchecked){
-         filter_car -> setAirCond(std::make_pair(false, false));
-     }else if(ui -> checkBox -> checkState() == Qt::PartiallyChecked){
-         filter_car -> setAirCond(std::make_pair(true, false));
+     if(!vector_of_cars.empty()){
+         filter_car -> setMark(ui-> comboBox_2 -> currentText());
+         filter_car -> setModel(ui-> comboBox_3 -> currentText());
+         filter_car -> setBodywork(ui-> comboBox_4 -> currentText());
+         filter_car -> setColour(ui -> comboBox_5 -> currentText());
+         filter_car -> setMileage(ui -> spinBox_3 -> value());
+         filter_car -> setEngineCap(ui -> doubleSpinBox_2 -> value());
+         filter_car -> setHP(ui -> spinBox_5 -> value());
+         if(ui -> checkBox -> checkState() == Qt::Unchecked){
+             filter_car -> setAirCond(std::make_pair(false, false));
+         }else if(ui -> checkBox -> checkState() == Qt::PartiallyChecked){
+             filter_car -> setAirCond(std::make_pair(true, false));
+         }else{
+             filter_car -> setAirCond(std::make_pair(true, true));
+         }
+         if(ui -> checkBox_2 -> checkState() == Qt::Unchecked){
+             filter_car -> setGPS(std::make_pair(false, false));
+         }else if(ui -> checkBox_2 -> checkState() == Qt::PartiallyChecked){
+             filter_car -> setGPS(std::make_pair(true, false));
+         }else{
+             filter_car -> setGPS(std::make_pair(true, true));
+         }
+
+         Car::check_filters(filter_car);
+
+         Car::display(ui -> tableWidget);
      }else{
-         filter_car -> setAirCond(std::make_pair(true, true));
-     }
-     if(ui -> checkBox_2 -> checkState() == Qt::Unchecked){
-         filter_car -> setGPS(std::make_pair(false, false));
-     }else if(ui -> checkBox_2 -> checkState() == Qt::PartiallyChecked){
-         filter_car -> setGPS(std::make_pair(true, false));
-     }else{
-         filter_car -> setGPS(std::make_pair(true, true));
+         QMessageBox::information(this, "Searching", "Set connection with database first!");
      }
 
-     Car::check_filters(filter_car);
-
-     Car::display(ui -> tableWidget);
-
+     vector_of_cars.clear();
      delete filter_car;
 }
 
@@ -139,14 +144,52 @@ void MainWindow::on_comboBox_2_currentTextChanged(const QString &arg1){//adding 
 }
 
 void MainWindow::on_spinBox_valueChanged(int arg1){
-    Car::setMileageRange(arg1);
+    if(ui -> spinBox_3 -> value() != 0){
+        Car::setMileageRange(arg1);
+    }else{
+        if(arg1 != 0.0){
+            ui -> spinBox -> setValue(0.0);
+            QMessageBox::information(this, "Value", "Value of mileage filter has to be diffrent from zero!");
+        }
+    }
 }
 
 void MainWindow::on_doubleSpinBox_valueChanged(double arg1){
-    Car::setEngineCapRange(arg1);
+    if(ui -> doubleSpinBox_2 -> value() != 0){
+        Car::setEngineCapRange(arg1);
+    }else{
+        if(arg1 != 0.0){
+            ui -> doubleSpinBox -> setValue(0.0);
+            QMessageBox::information(this, "Value", "Value of engine capacity filter has to be diffrent from zero!");
+        }
+    }
 }
 
 void MainWindow::on_spinBox_2_valueChanged(int arg1){
-    Car::setHpRange(arg1);
+    if(ui -> spinBox_5 -> value() != 0){
+        Car::setHpRange(arg1);
+    }else{
+        if(arg1 != 0.0){
+            ui -> spinBox_2 -> setValue(0.0);
+            QMessageBox::information(this, "Value", "Value of horse power filter has to be diffrent from zero!");
+        }
+    }
+}
+
+void MainWindow::on_remove_button_clicked(){
+    ui -> comboBox_2 -> setCurrentIndex(0);
+    ui -> comboBox_3 -> setCurrentIndex(0);
+    ui -> comboBox_4 -> setCurrentIndex(0);
+    ui -> comboBox_5 -> setCurrentIndex(0);
+    ui -> checkBox -> setCheckState(Qt::PartiallyChecked);
+    ui -> checkBox_2 -> setCheckState(Qt::PartiallyChecked);
+    ui -> spinBox -> setValue(0);
+    ui -> spinBox_2 -> setValue(0);
+    ui -> spinBox_3 -> setValue(0);
+    ui -> spinBox_5 -> setValue(0);
+    ui -> doubleSpinBox -> setValue(0.0);
+    ui -> doubleSpinBox_2 -> setValue(0.0);
+
+    on_search_button_clicked();
 }
 
