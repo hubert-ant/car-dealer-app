@@ -20,20 +20,9 @@ int Car::mileage_filter_range_ = 0;
 float Car::engine_cap_filter_range_ = 0.0;
 float Car::hp_filter_range_ = 0.0;
 
-Car::Car(){//????????????????????????????
-    id_ = 111111111;
-    mark_ = "mark";
-    model_ = "model";
-    mileage_ = 0;
-    engine_capacity_ = 100000000000000000.0;
-    hp_ = 100000000000000000.0;
-    colour_ = "colour";
-    air_conditioning_ = std::make_pair(false, false);
-    gps_ = std::make_pair(false, false);
-    doors_ = 0;
-    bodywork_ = "bodywork";
-    visibility_ = true;
-}
+Car::Car(): gps_(std::make_pair(false, false)), air_conditioning_(std::make_pair(false, false)),
+            id_(0), mileage_(0), doors_(0), mark_("mark"), model_("model"), colour_("colour"),
+            bodywork_("bodywork"), engine_capacity_(0.0), hp_(0), visibility_(true){}
 
 void Car::setID(int id){
     id_ = id;
@@ -131,21 +120,7 @@ bool Car::operator==(const Car &car)const{
             ((gps_ == car.gps_) || car.gps_ == std::make_pair(true, false));
 }
 
-void Car::setStaticFilters(Car *car){
-    // :((((
-    if(car -> engine_capacity_ == 0){
-        engine_cap_filter_range_ = 1000;
-    }
-    if(car -> hp_ == 0){
-        hp_filter_range_ = 1000;
-    }
-    if(car -> mileage_ == 0){
-        mileage_filter_range_ = 1000;
-    }
-}
-
 void Car::check_filters(Car *filter_car){
-    Car::setStaticFilters(filter_car);
     for(auto &car : cars_vector_){
         if(car != nullptr){
             if(*car == *filter_car){
@@ -158,7 +133,7 @@ void Car::check_filters(Car *filter_car){
 }
 
 void Car::display(QTableWidget *table){
-    int number_of_columns = 10;//czytanie z bazy danych sql?????????????????????????????????????
+    const int number_of_columns = 10;//czytanie z bazy danych sql?????????????????????????????????????
     int index = -1;
     int number_of_rows =0;
     QVector<QString> string_attributes;

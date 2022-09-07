@@ -70,7 +70,9 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1){
 
         ui -> checkBox -> setCheckState(Qt::PartiallyChecked);
         ui -> checkBox_2 -> setCheckState(Qt::PartiallyChecked);
-        QVector <Car*> vector_of_cars = Car::getVector(); //adding databse marks, bodyworks and colours to combobox
+        QVector <Car*> vector_of_cars = Car::getVector();
+
+        //adding databse marks, bodyworks and colours to combobox
         for(auto it = vector_of_cars.begin(); it != vector_of_cars.end(); it++){
             if(ui -> comboBox_2 -> findText((*it) -> getMark()) == -1){
                 ui -> comboBox_2 -> addItem((*it) -> getMark());
@@ -121,7 +123,6 @@ void MainWindow::on_search_button_clicked(){//searching cars we want, using filt
          }
 
          Car::check_filters(filter_car);
-
          Car::display(ui -> tableWidget);
      }else{
          QMessageBox::information(this, "Searching", "Set connection with database first!");
