@@ -14,11 +14,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "car.h"
+#include "login.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    Login::readLogin();
     db = QSqlDatabase::addDatabase("QMYSQL");
     ui->setupUi(this);
 }
@@ -43,6 +45,8 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1){
         db = read_database("cars");
     }else if(arg1 == "Motorbikes"){
         db = read_database("motorbikes");
+    }else{
+        db = read_database("");
     }
 
     if(db.open()){
@@ -132,7 +136,7 @@ void MainWindow::on_search_button_clicked(){//searching cars we want, using filt
      delete filter_car;
 }
 
-void MainWindow::on_comboBox_2_currentTextChanged(const QString &arg1){//adding models connected to marks
+void MainWindow::on_comboBox_2_currentTextChanged(const QString &arg1){//adding models to comboBox - connected with marks
     ui -> comboBox_3 -> clear();
     ui -> comboBox_3 -> addItem("");
     QVector <Car*> vector_of_cars = Car::getVector();
@@ -192,5 +196,32 @@ void MainWindow::on_remove_button_clicked(){
     ui -> doubleSpinBox_2 -> setValue(0.0);
 
     on_search_button_clicked();
+}
+
+void MainWindow::on_login_button_clicked(){
+    QString login = ui -> lineEdit -> text();
+    QString password = ui -> lineEdit_2 -> text();
+
+    std::pair<QString, QString> user_login = std::make_pair(login, password);
+    Login::setUserLogin(user_login);
+    Login::checkCloseness();
+}
+
+
+void MainWindow::on_checkBox_3_stateChanged(int arg1){
+    if(arg1){
+        ui -> lineEdit_2 -> setEchoMode(QLineEdit::Normal);
+    }else{
+        ui -> lineEdit_2 -> setEchoMode(QLineEdit::Password);
+    }
+}
+
+void MainWindow::on_reset_button_clicked(){
+    if(Login::getLoggedIn()){
+        QWidget *new_window = new QWidget;
+        new_window -> show();
+    }else{
+        QMessageBox::information(0, "Incorrect operation!", "You must be logged in to change password!");
+    }
 }
 

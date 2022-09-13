@@ -50,6 +50,12 @@ private slots:
 
     void on_remove_button_clicked();
 
+    void on_login_button_clicked();
+
+    void on_checkBox_3_stateChanged(int arg1);
+
+    void on_reset_button_clicked();
+
 private:
     QSqlDatabase db;
     Ui::MainWindow *ui;

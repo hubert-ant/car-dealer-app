@@ -10,20 +10,24 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -32,7 +36,18 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QPushButton *search_button;
+    QTabWidget *tabWidget;
+    QWidget *tab;
+    QFrame *frame;
+    QGridLayout *gridLayout_3;
+    QLabel *label_7;
+    QLineEdit *lineEdit;
+    QPushButton *login_button;
+    QLabel *label_8;
+    QLineEdit *lineEdit_2;
+    QPushButton *reset_button;
+    QCheckBox *checkBox_3;
+    QWidget *Searchcars;
     QWidget *widget;
     QGridLayout *gridLayout;
     QLabel *label;
@@ -45,33 +60,36 @@ public:
     QComboBox *comboBox_4;
     QLabel *label_2;
     QComboBox *comboBox_5;
+    QPushButton *search_button;
     QWidget *widget_2;
     QGridLayout *gridLayout_2;
-    QLabel *label_6;
-    QSpinBox *spinBox_3;
-    QLabel *label_15;
-    QSpinBox *spinBox;
-    QLabel *label_13;
-    QDoubleSpinBox *doubleSpinBox_2;
     QLabel *label_16;
-    QDoubleSpinBox *doubleSpinBox;
-    QLabel *label_14;
-    QSpinBox *spinBox_5;
+    QLabel *label_6;
+    QLabel *label_15;
+    QLabel *label_13;
+    QSpinBox *spinBox_3;
+    QDoubleSpinBox *doubleSpinBox_2;
     QLabel *label_17;
-    QSpinBox *spinBox_2;
+    QSpinBox *spinBox;
+    QLabel *label_14;
+    QDoubleSpinBox *doubleSpinBox;
     QCheckBox *checkBox;
     QCheckBox *checkBox_2;
+    QSpinBox *spinBox_2;
+    QSpinBox *spinBox_5;
     QPushButton *remove_button;
     QTableWidget *tableWidget;
     QMenuBar *menubar;
+    QMenu *menuFile;
+    QMenu *menuTools;
+    QMenu *menuHelp;
     QStatusBar *statusbar;
-    QToolBar *toolBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(986, 591);
+        MainWindow->resize(1050, 650);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -79,12 +97,62 @@ public:
         MainWindow->setSizePolicy(sizePolicy);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        search_button = new QPushButton(centralwidget);
-        search_button->setObjectName(QString::fromUtf8("search_button"));
-        search_button->setGeometry(QRect(570, 90, 91, 41));
-        widget = new QWidget(centralwidget);
+        tabWidget = new QTabWidget(centralwidget);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        tabWidget->setEnabled(true);
+        tabWidget->setGeometry(QRect(0, 0, 1050, 650));
+        tabWidget->setMinimumSize(QSize(1050, 650));
+        tab = new QWidget();
+        tab->setObjectName(QString::fromUtf8("tab"));
+        frame = new QFrame(tab);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setGeometry(QRect(390, 30, 320, 100));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        gridLayout_3 = new QGridLayout(frame);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        label_7 = new QLabel(frame);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+
+        gridLayout_3->addWidget(label_7, 0, 0, 1, 1);
+
+        lineEdit = new QLineEdit(frame);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+
+        gridLayout_3->addWidget(lineEdit, 0, 1, 1, 1);
+
+        login_button = new QPushButton(frame);
+        login_button->setObjectName(QString::fromUtf8("login_button"));
+
+        gridLayout_3->addWidget(login_button, 0, 2, 1, 1);
+
+        label_8 = new QLabel(frame);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        gridLayout_3->addWidget(label_8, 1, 0, 1, 1);
+
+        lineEdit_2 = new QLineEdit(frame);
+        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+        lineEdit_2->setEchoMode(QLineEdit::Password);
+
+        gridLayout_3->addWidget(lineEdit_2, 1, 1, 1, 1);
+
+        reset_button = new QPushButton(frame);
+        reset_button->setObjectName(QString::fromUtf8("reset_button"));
+
+        gridLayout_3->addWidget(reset_button, 1, 2, 1, 1);
+
+        checkBox_3 = new QCheckBox(frame);
+        checkBox_3->setObjectName(QString::fromUtf8("checkBox_3"));
+
+        gridLayout_3->addWidget(checkBox_3, 2, 2, 1, 1);
+
+        tabWidget->addTab(tab, QString());
+        Searchcars = new QWidget();
+        Searchcars->setObjectName(QString::fromUtf8("Searchcars"));
+        widget = new QWidget(Searchcars);
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(20, 20, 197, 162));
+        widget->setGeometry(QRect(20, 30, 197, 162));
         gridLayout = new QGridLayout(widget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         label = new QLabel(widget);
@@ -149,15 +217,33 @@ public:
 
         gridLayout->addWidget(comboBox_5, 4, 1, 1, 1);
 
-        widget_2 = new QWidget(centralwidget);
+        search_button = new QPushButton(Searchcars);
+        search_button->setObjectName(QString::fromUtf8("search_button"));
+        search_button->setGeometry(QRect(640, 60, 91, 41));
+        widget_2 = new QWidget(Searchcars);
         widget_2->setObjectName(QString::fromUtf8("widget_2"));
-        widget_2->setGeometry(QRect(250, 20, 287, 133));
+        widget_2->setGeometry(QRect(280, 40, 287, 133));
         gridLayout_2 = new QGridLayout(widget_2);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        label_16 = new QLabel(widget_2);
+        label_16->setObjectName(QString::fromUtf8("label_16"));
+
+        gridLayout_2->addWidget(label_16, 1, 2, 1, 1);
+
         label_6 = new QLabel(widget_2);
         label_6->setObjectName(QString::fromUtf8("label_6"));
 
         gridLayout_2->addWidget(label_6, 0, 0, 1, 1);
+
+        label_15 = new QLabel(widget_2);
+        label_15->setObjectName(QString::fromUtf8("label_15"));
+
+        gridLayout_2->addWidget(label_15, 0, 2, 1, 1);
+
+        label_13 = new QLabel(widget_2);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+
+        gridLayout_2->addWidget(label_13, 1, 0, 1, 1);
 
         spinBox_3 = new QSpinBox(widget_2);
         spinBox_3->setObjectName(QString::fromUtf8("spinBox_3"));
@@ -165,23 +251,6 @@ public:
         spinBox_3->setSingleStep(20000);
 
         gridLayout_2->addWidget(spinBox_3, 0, 1, 1, 1);
-
-        label_15 = new QLabel(widget_2);
-        label_15->setObjectName(QString::fromUtf8("label_15"));
-
-        gridLayout_2->addWidget(label_15, 0, 2, 1, 1);
-
-        spinBox = new QSpinBox(widget_2);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
-        spinBox->setMaximum(20000000);
-        spinBox->setSingleStep(1500);
-
-        gridLayout_2->addWidget(spinBox, 0, 3, 1, 1);
-
-        label_13 = new QLabel(widget_2);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
-
-        gridLayout_2->addWidget(label_13, 1, 0, 1, 1);
 
         doubleSpinBox_2 = new QDoubleSpinBox(widget_2);
         doubleSpinBox_2->setObjectName(QString::fromUtf8("doubleSpinBox_2"));
@@ -192,10 +261,22 @@ public:
 
         gridLayout_2->addWidget(doubleSpinBox_2, 1, 1, 1, 1);
 
-        label_16 = new QLabel(widget_2);
-        label_16->setObjectName(QString::fromUtf8("label_16"));
+        label_17 = new QLabel(widget_2);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
 
-        gridLayout_2->addWidget(label_16, 1, 2, 1, 1);
+        gridLayout_2->addWidget(label_17, 2, 2, 1, 1);
+
+        spinBox = new QSpinBox(widget_2);
+        spinBox->setObjectName(QString::fromUtf8("spinBox"));
+        spinBox->setMaximum(20000000);
+        spinBox->setSingleStep(1500);
+
+        gridLayout_2->addWidget(spinBox, 0, 3, 1, 1);
+
+        label_14 = new QLabel(widget_2);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+
+        gridLayout_2->addWidget(label_14, 2, 0, 1, 1);
 
         doubleSpinBox = new QDoubleSpinBox(widget_2);
         doubleSpinBox->setObjectName(QString::fromUtf8("doubleSpinBox"));
@@ -205,30 +286,6 @@ public:
         doubleSpinBox->setValue(0.000000000000000);
 
         gridLayout_2->addWidget(doubleSpinBox, 1, 3, 1, 1);
-
-        label_14 = new QLabel(widget_2);
-        label_14->setObjectName(QString::fromUtf8("label_14"));
-
-        gridLayout_2->addWidget(label_14, 2, 0, 1, 1);
-
-        spinBox_5 = new QSpinBox(widget_2);
-        spinBox_5->setObjectName(QString::fromUtf8("spinBox_5"));
-        spinBox_5->setMaximum(1000);
-        spinBox_5->setSingleStep(25);
-
-        gridLayout_2->addWidget(spinBox_5, 2, 1, 1, 1);
-
-        label_17 = new QLabel(widget_2);
-        label_17->setObjectName(QString::fromUtf8("label_17"));
-
-        gridLayout_2->addWidget(label_17, 2, 2, 1, 1);
-
-        spinBox_2 = new QSpinBox(widget_2);
-        spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
-        spinBox_2->setMaximum(1000);
-        spinBox_2->setSingleStep(10);
-
-        gridLayout_2->addWidget(spinBox_2, 2, 3, 1, 1);
 
         checkBox = new QCheckBox(widget_2);
         checkBox->setObjectName(QString::fromUtf8("checkBox"));
@@ -243,26 +300,51 @@ public:
 
         gridLayout_2->addWidget(checkBox_2, 3, 3, 1, 1);
 
-        remove_button = new QPushButton(centralwidget);
+        spinBox_2 = new QSpinBox(widget_2);
+        spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
+        spinBox_2->setMaximum(1000);
+        spinBox_2->setSingleStep(10);
+
+        gridLayout_2->addWidget(spinBox_2, 2, 3, 1, 1);
+
+        spinBox_5 = new QSpinBox(widget_2);
+        spinBox_5->setObjectName(QString::fromUtf8("spinBox_5"));
+        spinBox_5->setMaximum(1000);
+        spinBox_5->setSingleStep(25);
+
+        gridLayout_2->addWidget(spinBox_5, 2, 1, 1, 1);
+
+        remove_button = new QPushButton(Searchcars);
         remove_button->setObjectName(QString::fromUtf8("remove_button"));
-        remove_button->setGeometry(QRect(570, 30, 91, 24));
-        tableWidget = new QTableWidget(centralwidget);
+        remove_button->setGeometry(QRect(640, 120, 91, 24));
+        tableWidget = new QTableWidget(Searchcars);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setGeometry(QRect(0, 201, 986, 361));
+        tableWidget->setGeometry(QRect(0, 250, 1050, 331));
         tableWidget->setDragDropOverwriteMode(true);
+        tabWidget->addTab(Searchcars, QString());
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 986, 21));
+        menubar->setGeometry(QRect(0, 0, 1050, 21));
+        menuFile = new QMenu(menubar);
+        menuFile->setObjectName(QString::fromUtf8("menuFile"));
+        menuTools = new QMenu(menubar);
+        menuTools->setObjectName(QString::fromUtf8("menuTools"));
+        menuHelp = new QMenu(menubar);
+        menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
-        toolBar = new QToolBar(MainWindow);
-        toolBar->setObjectName(QString::fromUtf8("toolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
+
+        menubar->addAction(menuFile->menuAction());
+        menubar->addAction(menuTools->menuAction());
+        menubar->addAction(menuHelp->menuAction());
 
         retranslateUi(MainWindow);
+
+        tabWidget->setCurrentIndex(0);
+
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -270,7 +352,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        search_button->setText(QCoreApplication::translate("MainWindow", "SEARCH", nullptr));
+        label_7->setText(QCoreApplication::translate("MainWindow", "Login", nullptr));
+        login_button->setText(QCoreApplication::translate("MainWindow", "Log in", nullptr));
+        label_8->setText(QCoreApplication::translate("MainWindow", "Password", nullptr));
+        reset_button->setText(QCoreApplication::translate("MainWindow", "Reset password", nullptr));
+        checkBox_3->setText(QCoreApplication::translate("MainWindow", "Password visibility", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Add cars", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Category", nullptr));
         comboBox->setItemText(0, QString());
         comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "Cars", nullptr));
@@ -288,16 +375,20 @@ public:
         label_2->setText(QCoreApplication::translate("MainWindow", "Colour", nullptr));
         comboBox_5->setItemText(0, QString());
 
+        search_button->setText(QCoreApplication::translate("MainWindow", "SEARCH", nullptr));
+        label_16->setText(QCoreApplication::translate("MainWindow", "+/-", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "Mileage", nullptr));
         label_15->setText(QCoreApplication::translate("MainWindow", "+/-", nullptr));
         label_13->setText(QCoreApplication::translate("MainWindow", "Engine capacity", nullptr));
-        label_16->setText(QCoreApplication::translate("MainWindow", "+/-", nullptr));
-        label_14->setText(QCoreApplication::translate("MainWindow", "Horse power", nullptr));
         label_17->setText(QCoreApplication::translate("MainWindow", "+/-", nullptr));
+        label_14->setText(QCoreApplication::translate("MainWindow", "Horse power", nullptr));
         checkBox->setText(QCoreApplication::translate("MainWindow", "Air conditioning", nullptr));
         checkBox_2->setText(QCoreApplication::translate("MainWindow", "GPS", nullptr));
         remove_button->setText(QCoreApplication::translate("MainWindow", "Remove filters", nullptr));
-        toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(Searchcars), QCoreApplication::translate("MainWindow", "Search cars", nullptr));
+        menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
+        menuTools->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
+        menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
     } // retranslateUi
 
 };
