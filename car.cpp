@@ -132,6 +132,30 @@ void Car::check_filters(Car *filter_car){
     }
 }
 
+void Car::fillVector(QSqlDatabase &db){
+    cars_vector_.clear();
+    QSqlQuery query;
+    if(query.exec("SELECT * FROM `car_dealer`")){
+        while(query.next()){
+            Car *car = new Car();
+            car -> setID(query.value(0).toInt());
+            car -> setMark(query.value(1).toString());
+            car -> setModel(query.value(2).toString());
+            car -> setMileage(query.value(3).toInt());
+            car -> setEngineCap(query.value(4).toFloat());
+            car -> setHP(query.value(5).toFloat())   ;
+            car -> setColour(query.value(6).toString());
+            car -> setAirCond(std::make_pair(query.value(7).toBool(), query.value(7).toBool()));
+            car -> setGPS(std::make_pair(query.value(8).toBool(), query.value(8).toBool()));
+            car -> setDoors(query.value(9).toInt());
+            car -> setBodywork(query.value(10).toString());
+            car -> emplaceToVector();
+        }
+    }else{
+        qDebug() << "Error = " << db.lastError();
+    }
+}
+
 void Car::display(QTableWidget *table){
     const int number_of_columns = 10;//czytanie z bazy danych sql?????????????????????????????????????
     int index = -1;
@@ -189,3 +213,5 @@ void Car::display(QTableWidget *table){
     }
     string_attributes.clear();
 }
+
+

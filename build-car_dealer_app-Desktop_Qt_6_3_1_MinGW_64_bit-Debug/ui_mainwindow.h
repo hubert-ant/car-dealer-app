@@ -15,6 +15,7 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
@@ -47,6 +48,31 @@ public:
     QLineEdit *lineEdit_2;
     QPushButton *reset_button;
     QCheckBox *checkBox_3;
+    QWidget *formLayoutWidget;
+    QFormLayout *formLayout;
+    QLabel *label_9;
+    QLineEdit *lineEdit_3;
+    QLabel *label_10;
+    QLineEdit *lineEdit_4;
+    QLabel *label_11;
+    QLineEdit *lineEdit_5;
+    QLabel *label_12;
+    QLineEdit *lineEdit_6;
+    QLabel *label_18;
+    QLineEdit *lineEdit_7;
+    QLabel *label_24;
+    QLineEdit *lineEdit_13;
+    QLabel *label_25;
+    QLabel *label_26;
+    QLabel *label_27;
+    QLabel *label_28;
+    QPushButton *pushButton_2;
+    QPushButton *connect_to_databse;
+    QComboBox *comboBox_6;
+    QComboBox *comboBox_7;
+    QComboBox *comboBox_8;
+    QLineEdit *lineEdit_14;
+    QTableWidget *tableWidget_2;
     QWidget *Searchcars;
     QWidget *widget;
     QGridLayout *gridLayout;
@@ -147,6 +173,134 @@ public:
 
         gridLayout_3->addWidget(checkBox_3, 2, 2, 1, 1);
 
+        formLayoutWidget = new QWidget(tab);
+        formLayoutWidget->setObjectName(QString::fromUtf8("formLayoutWidget"));
+        formLayoutWidget->setGeometry(QRect(70, 190, 311, 351));
+        formLayout = new QFormLayout(formLayoutWidget);
+        formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        formLayout->setContentsMargins(0, 0, 0, 0);
+        label_9 = new QLabel(formLayoutWidget);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        formLayout->setWidget(0, QFormLayout::LabelRole, label_9);
+
+        lineEdit_3 = new QLineEdit(formLayoutWidget);
+        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
+
+        formLayout->setWidget(0, QFormLayout::FieldRole, lineEdit_3);
+
+        label_10 = new QLabel(formLayoutWidget);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+
+        formLayout->setWidget(1, QFormLayout::LabelRole, label_10);
+
+        lineEdit_4 = new QLineEdit(formLayoutWidget);
+        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
+
+        formLayout->setWidget(1, QFormLayout::FieldRole, lineEdit_4);
+
+        label_11 = new QLabel(formLayoutWidget);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+
+        formLayout->setWidget(2, QFormLayout::LabelRole, label_11);
+
+        lineEdit_5 = new QLineEdit(formLayoutWidget);
+        lineEdit_5->setObjectName(QString::fromUtf8("lineEdit_5"));
+
+        formLayout->setWidget(2, QFormLayout::FieldRole, lineEdit_5);
+
+        label_12 = new QLabel(formLayoutWidget);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        formLayout->setWidget(3, QFormLayout::LabelRole, label_12);
+
+        lineEdit_6 = new QLineEdit(formLayoutWidget);
+        lineEdit_6->setObjectName(QString::fromUtf8("lineEdit_6"));
+
+        formLayout->setWidget(3, QFormLayout::FieldRole, lineEdit_6);
+
+        label_18 = new QLabel(formLayoutWidget);
+        label_18->setObjectName(QString::fromUtf8("label_18"));
+
+        formLayout->setWidget(4, QFormLayout::LabelRole, label_18);
+
+        lineEdit_7 = new QLineEdit(formLayoutWidget);
+        lineEdit_7->setObjectName(QString::fromUtf8("lineEdit_7"));
+
+        formLayout->setWidget(4, QFormLayout::FieldRole, lineEdit_7);
+
+        label_24 = new QLabel(formLayoutWidget);
+        label_24->setObjectName(QString::fromUtf8("label_24"));
+
+        formLayout->setWidget(5, QFormLayout::LabelRole, label_24);
+
+        lineEdit_13 = new QLineEdit(formLayoutWidget);
+        lineEdit_13->setObjectName(QString::fromUtf8("lineEdit_13"));
+
+        formLayout->setWidget(5, QFormLayout::FieldRole, lineEdit_13);
+
+        label_25 = new QLabel(formLayoutWidget);
+        label_25->setObjectName(QString::fromUtf8("label_25"));
+
+        formLayout->setWidget(6, QFormLayout::LabelRole, label_25);
+
+        label_26 = new QLabel(formLayoutWidget);
+        label_26->setObjectName(QString::fromUtf8("label_26"));
+
+        formLayout->setWidget(7, QFormLayout::LabelRole, label_26);
+
+        label_27 = new QLabel(formLayoutWidget);
+        label_27->setObjectName(QString::fromUtf8("label_27"));
+
+        formLayout->setWidget(8, QFormLayout::LabelRole, label_27);
+
+        label_28 = new QLabel(formLayoutWidget);
+        label_28->setObjectName(QString::fromUtf8("label_28"));
+
+        formLayout->setWidget(9, QFormLayout::LabelRole, label_28);
+
+        pushButton_2 = new QPushButton(formLayoutWidget);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        formLayout->setWidget(10, QFormLayout::FieldRole, pushButton_2);
+
+        connect_to_databse = new QPushButton(formLayoutWidget);
+        connect_to_databse->setObjectName(QString::fromUtf8("connect_to_databse"));
+
+        formLayout->setWidget(10, QFormLayout::LabelRole, connect_to_databse);
+
+        comboBox_6 = new QComboBox(formLayoutWidget);
+        comboBox_6->addItem(QString());
+        comboBox_6->addItem(QString());
+        comboBox_6->addItem(QString());
+        comboBox_6->setObjectName(QString::fromUtf8("comboBox_6"));
+
+        formLayout->setWidget(6, QFormLayout::FieldRole, comboBox_6);
+
+        comboBox_7 = new QComboBox(formLayoutWidget);
+        comboBox_7->addItem(QString());
+        comboBox_7->addItem(QString());
+        comboBox_7->addItem(QString());
+        comboBox_7->setObjectName(QString::fromUtf8("comboBox_7"));
+
+        formLayout->setWidget(7, QFormLayout::FieldRole, comboBox_7);
+
+        comboBox_8 = new QComboBox(formLayoutWidget);
+        comboBox_8->addItem(QString());
+        comboBox_8->addItem(QString());
+        comboBox_8->addItem(QString());
+        comboBox_8->setObjectName(QString::fromUtf8("comboBox_8"));
+
+        formLayout->setWidget(8, QFormLayout::FieldRole, comboBox_8);
+
+        lineEdit_14 = new QLineEdit(formLayoutWidget);
+        lineEdit_14->setObjectName(QString::fromUtf8("lineEdit_14"));
+
+        formLayout->setWidget(9, QFormLayout::FieldRole, lineEdit_14);
+
+        tableWidget_2 = new QTableWidget(tab);
+        tableWidget_2->setObjectName(QString::fromUtf8("tableWidget_2"));
+        tableWidget_2->setGeometry(QRect(465, 191, 561, 351));
         tabWidget->addTab(tab, QString());
         Searchcars = new QWidget();
         Searchcars->setObjectName(QString::fromUtf8("Searchcars"));
@@ -357,6 +511,30 @@ public:
         label_8->setText(QCoreApplication::translate("MainWindow", "Password", nullptr));
         reset_button->setText(QCoreApplication::translate("MainWindow", "Reset password", nullptr));
         checkBox_3->setText(QCoreApplication::translate("MainWindow", "Password visibility", nullptr));
+        label_9->setText(QCoreApplication::translate("MainWindow", "MARK", nullptr));
+        label_10->setText(QCoreApplication::translate("MainWindow", "MODEL", nullptr));
+        label_11->setText(QCoreApplication::translate("MainWindow", "MILEAGE", nullptr));
+        label_12->setText(QCoreApplication::translate("MainWindow", "ENGINE CAPACITY", nullptr));
+        label_18->setText(QCoreApplication::translate("MainWindow", "HORSE POWER", nullptr));
+        label_24->setText(QCoreApplication::translate("MainWindow", "COLOUR", nullptr));
+        label_25->setText(QCoreApplication::translate("MainWindow", "AIR CONDITIONING", nullptr));
+        label_26->setText(QCoreApplication::translate("MainWindow", "GPS", nullptr));
+        label_27->setText(QCoreApplication::translate("MainWindow", "NUMBER OF DOORS", nullptr));
+        label_28->setText(QCoreApplication::translate("MainWindow", "BODYWORK", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Add to database", nullptr));
+        connect_to_databse->setText(QCoreApplication::translate("MainWindow", "Connect to database", nullptr));
+        comboBox_6->setItemText(0, QString());
+        comboBox_6->setItemText(1, QCoreApplication::translate("MainWindow", "YES", nullptr));
+        comboBox_6->setItemText(2, QCoreApplication::translate("MainWindow", "NO", nullptr));
+
+        comboBox_7->setItemText(0, QString());
+        comboBox_7->setItemText(1, QCoreApplication::translate("MainWindow", "YES", nullptr));
+        comboBox_7->setItemText(2, QCoreApplication::translate("MainWindow", "NO", nullptr));
+
+        comboBox_8->setItemText(0, QString());
+        comboBox_8->setItemText(1, QCoreApplication::translate("MainWindow", "3", nullptr));
+        comboBox_8->setItemText(2, QCoreApplication::translate("MainWindow", "5", nullptr));
+
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Add cars", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Category", nullptr));
         comboBox->setItemText(0, QString());

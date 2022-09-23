@@ -16,6 +16,8 @@
 
 #include "qtablewidget.h"
 #include <QApplication>
+#include <QtSql>
+#include <QSqlDatabase>
 
 class Car{
 private:
@@ -53,6 +55,7 @@ public:
     static void clearVector();
     static void check_filters(Car *car);
     static void display(QTableWidget *table);
+    static void fillVector(QSqlDatabase &db);
     bool operator==(const Car &car)const;
 };
 

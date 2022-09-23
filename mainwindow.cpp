@@ -40,6 +40,7 @@ QSqlDatabase MainWindow::read_database(const QString &database_name){
 
 void MainWindow::on_comboBox_currentTextChanged(const QString &arg1){
     Car::clearVector();
+    db.close();
 
     if(arg1 == "Cars"){
         db = read_database("cars");
@@ -50,26 +51,7 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1){
     }
 
     if(db.open()){
-        QSqlQuery query;
-        if(query.exec("SELECT * FROM `car_dealer`")){
-            while(query.next()){
-                Car *car = new Car();
-                car -> setID(query.value(0).toInt());
-                car -> setMark(query.value(1).toString());
-                car -> setModel(query.value(2).toString());
-                car -> setMileage(query.value(3).toInt());
-                car -> setEngineCap(query.value(4).toFloat());
-                car -> setHP(query.value(5).toFloat())   ;
-                car -> setColour(query.value(6).toString());
-                car -> setAirCond(std::make_pair(query.value(7).toBool(), query.value(7).toBool()));
-                car -> setGPS(std::make_pair(query.value(8).toBool(), query.value(8).toBool()));
-                car -> setDoors(query.value(9).toInt());
-                car -> setBodywork(query.value(10).toString());
-                car -> emplaceToVector();
-            }
-        }else{
-            qDebug() << "Error = " << db.lastError();
-        }
+        Car::fillVector(db);//reading cars from database
         db.close();
 
         ui -> checkBox -> setCheckState(Qt::PartiallyChecked);
@@ -216,12 +198,50 @@ void MainWindow::on_checkBox_3_stateChanged(int arg1){
     }
 }
 
-void MainWindow::on_reset_button_clicked(){
+void MainWindow::on_reset_button_clicked(){//needs to be upgraded!!!!!
     if(Login::getLoggedIn()){
         QWidget *new_window = new QWidget;
         new_window -> show();
     }else{
         QMessageBox::information(0, "Incorrect operation!", "You must be logged in to change password!");
+    }
+}
+
+void MainWindow::on_connect_to_databse_clicked(){
+    db = read_database("cars");
+    if(Login::getLoggedIn()){
+        if(db.open()){
+            Car::fillVector(db);
+            Car::display(ui -> tableWidget_2);
+        }else{
+            QMessageBox::information(0, "Connection", "Not connected!");
+        }
+    }else{
+        QMessageBox::information(0, "Warning!", "You must be logged in to connect to database!");
+    }
+}
+
+void MainWindow::on_pushButton_2_clicked(){
+    QString mark = ui -> lineEdit_3 -> text();
+    QString model = ui -> lineEdit_4 -> text();
+    QString colour = ui -> lineEdit_13 -> text();
+    QString bodywork = ui -> lineEdit_14 -> text();
+
+    int mileage = ui -> lineEdit_5 -> text().toInt();
+    float eng_cap = ui -> lineEdit_6 -> text().toFloat();
+    int horse_powe = ui -> lineEdit_7 -> text().toInt();
+    int number_of_doors = ui -> comboBox_8 -> currentText().toInt();
+
+    bool air_cond = ui -> comboBox_6 -> currentText().toInt();
+    bool gps = ui -> comboBox_7 -> currentText().toInt();
+
+    if(db.open()){
+        //add new car to database
+
+
+        //QMessageBox::information(0, "Connection", "Connected succesfully!");
+    }else{
+        QMessageBox::information(0, "Warning!", "You must be connected to database to add a new record!");
     }
 }
 

@@ -19,7 +19,6 @@
 class Login{
 private:
     static std::pair<QString, QString> login_, user_login_;
-    //std::pair<QString, QString> user_login_;
     static bool is_logged_in_;
 public:
     Login(){}
